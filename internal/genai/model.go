@@ -8,3 +8,7 @@ type ollamaRequest struct {
 type ollamaResponse struct {
 	Response string `json:"response"`
 }
+
+type GenAiQueryRequest struct {
+	Prompt string `json:"prompt"`
+}

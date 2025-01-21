@@ -13,9 +13,9 @@ type GenAIRepository struct {
 	cfg *config.Config
 }
 
-func NewGenAIRepository(repo *GenAIRepository) *GenAIService {
-	return &GenAIService{
-		repo: repo,
+func NewGenAIRepository(cfg *config.Config) *GenAIRepository {
+	return &GenAIRepository{
+		cfg: cfg,
 	}
 }
 

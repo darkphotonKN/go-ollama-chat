@@ -22,9 +22,7 @@ func (h *GenAIHandler) QueryAIHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var request struct {
-		Prompt string `json:"prompt"`
-	}
+	var request GenAiQueryRequest
 
 	if err := json.NewDecoder(r.Body).Decode(&request); err != nil {
 		http.Error(w, "Invalid JSON payload", http.StatusBadRequest)
