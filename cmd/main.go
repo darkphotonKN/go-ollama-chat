@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -15,6 +16,6 @@ func main() {
 	// load routers
 	SetupRoutes(&cfg)
 
-	log.Printf("Starting on port %d\n", 8282)
-	http.ListenAndServe(":8282", nil)
+	log.Printf("Starting on port %s\n", cfg.Port)
+	http.ListenAndServe(fmt.Sprintf(":%s", cfg.Port), nil)
 }

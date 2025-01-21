@@ -2,6 +2,7 @@ package genai
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 )
@@ -17,6 +18,7 @@ func NewGenAIHandler(service *GenAIService) *GenAIHandler {
 }
 
 func (h *GenAIHandler) QueryAIHandler(w http.ResponseWriter, r *http.Request) {
+
 	if r.Method != http.MethodPost {
 		http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
 		return
@@ -29,7 +31,8 @@ func (h *GenAIHandler) QueryAIHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	response, err := h.service.QueryAIService(request.Prompt)
+	queryResponse, err := h.service.QueryAIService(request.Prompt)
+
 	if err != nil {
 		log.Printf("Error querying AI: %v", err)
 		http.Error(w, "Internal server error", http.StatusInternalServerError)
@@ -37,7 +40,10 @@ func (h *GenAIHandler) QueryAIHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(map[string]string{
-		"response": response,
-	})
+
+	response, err := json.Marshal(queryResponse)
+
+	fmt.Printf("Error when attempting to marshal query response: %s\n", err)
+
+	w.Write(response)
 }

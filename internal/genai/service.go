@@ -10,6 +10,6 @@ func NewGenAIService(repo *GenAIRepository) *GenAIService {
 	}
 }
 
-func (s *GenAIService) QueryAIService(prompt string) (string, error) {
+func (s *GenAIService) QueryAIService(prompt string) (*OllamaResponse, error) {
 	return s.repo.QueryOllama(prompt)
 }

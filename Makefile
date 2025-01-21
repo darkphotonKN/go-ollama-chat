@@ -1,11 +1,9 @@
 
 build:
-	go build -o bin/app ./cmd
+	@go build -o bin/app ./cmd
 
 run: build
-	./bin/app
+	@./bin/app
 
-pure-run:
-	./bin/app
 
 
